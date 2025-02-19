@@ -4,11 +4,14 @@
 
 <%# <%= render partial: "product", locals: { my_product: @product, my_reviews: @reviews } %> 
 
-<%= render partial: "product", locals: { product: @product } %>
+<%# <%= render partial: "product", locals: { product: @product } %>
 
-<%= render partial: "product", locals: { product: @product, product_reviews: @product.reviews } %>
+<%# <%= render partial: "product", locals: { product: @product, product_reviews: @product.reviews } %>
 
-<%= render partial: "form", locals: { product: @product, redirect: true } %>
+<%# <%= render partial: "form", locals: { product: @product, redirect: true } %> 
+
+<%= render partial: "product", collection: @products %>
+
 
 
 

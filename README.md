@@ -417,4 +417,37 @@ xml.div {
 <%= render partial: "product", locals: { item: @item } %>
 ```
 
+## 4.7 Rendering Collections
+
+### Iterating Over Collections
+
+- Instead of manually iterating over @products and rendering a partial:
+
+```bash
+<% @products.each do |product| %>
+  <%= render partial: "product", locals: { product: product } %>
+<% end %>
+```
+
+- Use a single-line shorthand:
+
+```bash
+<%= render partial: "product", collection: @products %>
+```
+
+- Each instance of the partial gets access to an individual member of the collection using a variable named after the partial (e.g., product for _product.html.erb).
+
+### Shorthand Syntax
+
+- Rails allows an even shorter syntax:
+
+```bash
+<%= render @products %>
+```
+
+- This assumes @products is a collection of Product instances and automatically determines the correct partial based on naming conventions.
+
+- Works with collections containing multiple model types; Rails selects the correct partial for each instance.
+
+
 

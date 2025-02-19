@@ -16,16 +16,20 @@
   <% end %>
 <%# <% end %> 
 
-<p>Product Name: <%= product.name %></p>
+<%# <p>Product Name: <%= product.name %></p>
 
-<% if local_assigns[:product_reviews] %>
-  <p>Reviews: <%= product_reviews.count %></p>
-  <ul>
+<%# <% if local_assigns[:product_reviews] %>
+  <%# <p>Reviews: <%= product_reviews.count %></p>
+  <%# <ul>
     <% product_reviews.each do |review| %>
-      <li><%= review.content %></li>
-    <% end %>
-  </ul>
+      <%# <li><%= review.content %></li>
+    <%# <% end %>
+  <%# </ul>
 <% else %>
-  <p>No reviews available.</p>
+  <%# <p>No reviews available.</p>
 <% end %>
 
+<div>
+  <h3><%= product.name %></h3>
+  <p>Price: $<%= product.price %></p>
+</div>
