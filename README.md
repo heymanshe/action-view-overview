@@ -491,6 +491,79 @@ xml.div {
 <%= item_counter %> # Outputs: 0 for the first item, 1 for the second, etc.
 ```
 
+## 4.10 `local_assigns` with Pattern Matching
+
+- Ruby on Rails supports using Ruby 3.1's pattern matching with `local_assigns`, allowing cleaner and more expressive assignments in partial views.
+
+### Pattern Matching Assignment
+
+- `local_assigns` is a Hash and can be destructured using pattern matching:
+
+```bash
+local_assigns => { product:, **options }
+product # => "#<Product:0x0000000109ec5d10>"
+options # => {}
+```
+
+- When rendering a partial, additional options can be extracted and used in helper methods.
+
+```bash
+<%# app/views/products/_product.html.erb %>
+<% local_assigns => { product:, **options } %>
+
+<%= tag.div id: dom_id(product), **options do %>
+  <h1><%= product.name %></h1>
+<% end %>
+
+<%# app/views/products/show.html.erb %>
+<%= render "products/product", product: @product, class: "card" %>
+```
+
+- This results in:
+
+```bash
+<div id="product_1" class="card">
+  <h1>A widget</h1>
+</div>
+```
+
+### Variable Renaming with Pattern Matching
+
+- Variables can be renamed while destructuring:
+
+```bash
+local_assigns => { product: record }
+product             # => "#<Product:0x0000000109ec5d10>"
+record              # => "#<Product:0x0000000109ec5d10>"
+product == record   # => true
+```
+
+### Conditional Fetch with Defaults
+
+- `fetch` can be used to provide a default value when a key is missing:
+
+```bash
+<%# app/views/products/_product.html.erb %>
+<% local_assigns.fetch(:related_products, []).each do |related_product| %>
+  <%# ... %>
+<% end %>
+```
+
+### Using with_defaults for Compact Default Assignments
+
+- `with_defaults` allows setting default values concisely:
+
+```bash
+<%# app/views/products/_product.html.erb %>
+<% local_assigns.with_defaults(related_products: []) => { product:, related_products: } %>
+
+<%= tag.div id: dom_id(product) do %>
+  <h1><%= product.name %></h1>
+  <% related_products.each do |related_product| %>
+    <%# ... %>
+  <% end %>
+<% end %>
+```
 
 
 
