@@ -81,3 +81,47 @@ $ bin/rails generate scaffold article
 - These components together generate the final HTML response sent to the client.
 
 
+# 3. Templates
+
+- Rails supports different template formats for rendering responses:
+
+  - ERB (.html.erb): Embedded Ruby for HTML responses.
+
+  - Jbuilder (.json.jbuilder): Uses the Jbuilder gem for JSON responses.
+
+  - Builder (.builder): Uses Builder::XmlMarkup for XML responses.
+
+- Rails determines the template type based on the file extension, e.g., .html.erb for ERB templates and .json.jbuilder for Jbuilder templates.
+
+## 3.1 ERB Templates
+
+### ERB Tags
+
+- `<% %>`: Executes Ruby code without rendering output.
+
+- `<%= %>`: Executes Ruby code and renders output.
+
+```ruby
+<h1>Names</h1>
+<% @people.each do |person| %>
+  Name: <%= person.name %><br>
+<% end %>
+```
+
+- The loop runs with `<% %>`, and `<%= %>` outputs `person.name` dynamically.
+
+```ruby
+<%# WRONG %>
+Hi, Mr. <% puts "Frodo" %>
+```
+
+- `puts` or `print` does not work inside `ERB` templates.
+
+### ERB Comments
+
+- Use `<%# %>` to add `comments` in ERB, which won't be rendered in the final output.
+
+### Whitespace Control
+
+- `<%- -%>` can be used instead of `<% %>` to suppress leading and trailing whitespaces.
+

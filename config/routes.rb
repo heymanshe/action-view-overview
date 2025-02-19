@@ -13,5 +13,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :articles
-  root "articles#index"
+
+
+  resources :welcome
+  # root "welcome#index"
 end
