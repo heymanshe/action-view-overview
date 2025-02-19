@@ -1,0 +1,8 @@
+<h1>Product List</h1>
+
+<% products = [ {name: "Laptop", price: "$1000"}, {name: "Phone", price: "$500"} ] %>
+
+<% products.each do |product| %>
+  <%= render "product", product: product %>
+<% end %>
+

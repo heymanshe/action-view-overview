@@ -204,5 +204,26 @@ xml.div {
 - Fragment Caching allows parts of a page to be cached and expired separately.
 
 
+# 4. Partials 
 
+- Partials are reusable smaller templates that help break down a view into manageable chunks. They allow you to extract code from a main template into a separate file and render it within the main template. You can also pass data to partials.
 
+## 4.1 Rendering Partials
+
+- To include a partial in a view, use the render method:
+
+```ruby
+<%= render "product" %>
+```
+
+### Partial Naming Convention
+
+- Partial file names start with an underscore `(_)`.
+
+- When rendering, exclude the underscore:
+
+```ruby
+<%= render "application/product" %>
+```
+
+- This looks for `_product.html.erb` inside `app/views/application/`.
