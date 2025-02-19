@@ -1,24 +1,35 @@
-# README
+# 1. Action View 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Action View is the V in MVC (Model-View-Controller).
 
-Things you may want to cover:
+- Works with Action Controller to handle web requests.
 
-* Ruby version
+- Action Controller retrieves data, while Action View renders the response.
 
-* System dependencies
+## Templates
 
-* Configuration
+- Action View templates (or views) use Embedded Ruby (ERB) to integrate Ruby within HTML.
 
-* Database creation
+## Features
 
-* Database initialization
+- Provides helper methods for generating HTML tags for:
 
-* How to run the test suite
+  - Forms
 
-* Services (job queues, cache servers, search engines, etc.)
+  - Dates
 
-* Deployment instructions
+  - Strings
 
-* ...
+- Allows adding custom helpers to applications.
+
+## Integration with Active Model
+
+- Can use Active Model features like:
+
+  - `to_param`
+
+  - `to_partial_path`
+
+- Action View does not depend on Active Model and can work with any Ruby library.
+
+
