@@ -1,0 +1,15 @@
+<%= render "layouts/ad_banner" %>
+
+<h1>Products</h1>
+<%# 
+<% @products.each do |product| %> 
+  <%# <%= render partial: "product", locals: { my_product: product, my_reviews: @reviews[product.id] || []  } %>
+  <%# <%= render partial: "product", locals: { product: product, product_reviews: @product_reviews[product.id] || []} %>
+   <%# <%= render partial: "product", locals: { product: product } %> 
+
+   <%= render partial: @products, spacer_template: "product_ruler" %>
+<%# <% end %> 
+
+<%= render "layouts/footer" %>
+
+  

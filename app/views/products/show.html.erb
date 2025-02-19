@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<%# <%= render @product %> 
+
+<%# <%= render partial: "product", locals: { my_product: @product, my_reviews: @reviews } %> 
+
+<%# <%= render partial: "product", locals: { product: @product } %>
+
+<%# <%= render partial: "product", locals: { product: @product, product_reviews: @product.reviews } %>
+
+<%# <%= render partial: "form", locals: { product: @product, redirect: true } %> 
+
+<%= render partial: "product", collection: @products %>
+
+
+
+
+<div>
+  <%= link_to "Edit this product", edit_product_path(@product) %> |
+  <%= link_to "Back to products", products_path %>
+
+  <%= button_to "Destroy this product", @product, method: :delete %>
+</div>
+

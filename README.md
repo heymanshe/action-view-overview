@@ -204,5 +204,293 @@ xml.div {
 - Fragment Caching allows parts of a page to be cached and expired separately.
 
 
+# 4. Partials 
+
+- Partials are reusable smaller templates that help break down a view into manageable chunks. They allow you to extract code from a main template into a separate file and render it within the main template. You can also pass data to partials.
+
+## 4.1 Rendering Partials
+
+- To include a partial in a view, use the render method:
+
+```ruby
+<%= render "product" %>
+```
+
+### Partial Naming Convention
+
+- Partial file names start with an underscore `(_)`.
+
+- When rendering, exclude the underscore:
+
+```ruby
+<%= render "application/product" %>
+```
+
+- This looks for `_product.html.erb` inside `app/views/application/`.
+
+
+## 4.2 Using Partials to Simplify Views
+
+- Partials help simplify views by extracting repeated sections into separate files.
+
+- They work like methods in programming—keeping views clean and easier to understand.
+
+```ruby
+<%= render "application/ad_banner" %>
+
+<h1>Products</h1>
+
+<p>Here are a few of our fine products:</p>
+<% @products.each do |product| %>
+  <%= render partial: "product", locals: { product: product } %>
+<% end %>
+
+<%= render "application/footer" %>
+```
+
+### Breakdown
+
+- **Shared Partials**:
+
+  - `_ad_banner.html.erb` and `_footer.html.erb` contain content used across multiple pages.
+
+  - Keeps layout DRY (Don't Repeat Yourself).
+
+- **Rendering Collections**:
+
+  - `_product.html.erb` is used to render individual products.
+
+  - `<%= render partial: "product", locals: { product: product } %>` passes a product to the partial.
+
+  - Helps keep the main view focused on structure rather than details.
+
+### Benefits of Using Partials
+
+- Enhances code reusability.
+
+- Improves readability and maintainability.
+
+- Helps organize views logically and efficiently.
+
+## 4.3 Passing Data to Partials with locals Option
+
+- When rendering a partial in Rails, you can pass data to it using the locals option. Each key in the locals hash is available as a local variable within the partial.
+
+### Syntax
+
+**Rendering a Partial with locals**
+
+```bash
+<%= render partial: "product", locals: { my_product: @product } %>
+```
+
+**Using the Passed Local Variable in the Partial**
+
+```bash
+<%= tag.div id: dom_id(my_product) do %>
+  <h1><%= my_product.name %></h1>
+<% end %>
+```
+
+### Key Points
+
+- **Partial-local variables**: Variables passed via locals are only available inside the partial.
+
+- **Naming convention**: Typically, you would name the local variable the same as the object being passed (e.g., product instead of my_product).
+
+- **Passing multiple variables**: You can pass multiple variables like this:
+
+```bash
+<%= render partial: "product", locals: { my_product: @product, my_reviews: @reviews } %>
+```
+
+- **Error handling**: If a variable is referenced in the partial but not passed through locals, an `ActionView::Template::Error` will be raised.
+
+```bash
+<% product_reviews.each do |review| %>
+  <%# ... %>
+<% end %>
+```
+
+- This will raise an error if `product_reviews` is not included in `locals`.
+
+### Best Practices
+
+- Always ensure that variables used in partials are passed explicitly through `locals`.
+
+- Use meaningful variable names to avoid confusion between instance variables and local variables in partials.
+
+- When passing multiple values, organize them properly for clarity.
+
+## 4.4 Using local_assigns in Rails Partials
+
+- Each partial in Rails has a method called local_assigns, which allows access to keys passed via the locals: option. If a key is not provided when rendering the partial, local_assigns[:some_key] will return nil.
+
+```bash
+<%# app/views/products/show.html.erb %>
+<%= render partial: "product", locals: { product: @product } %>
+
+<%# app/views/products/_product.html.erb %>
+<% local_assigns[:product]          # => "#<Product:0x0000000109ec5d10>" %>
+<% local_assigns[:product_reviews]  # => nil %>
+```
+
+### Use Cases
+
+- **Conditional Execution in Partials**
+
+  - Using local_assigns, we can check if a local variable is passed and conditionally perform an action:
+
+  - ```bash
+    <% if local_assigns[:redirect] %>
+      <%= form.hidden_field :redirect, value: true %>
+    <% end %>
+    ```
+
+- **Example from Active Storage**
+
+  - Setting image size dynamically based on whether in_gallery is set:
+
+  - ```bash
+    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [800, 600] : [1024, 768]) %>
+    ```
+
+## 4.5 Render Without partial and locals Options
+
+- If partial and locals are the only options, you can omit their keys and provide values directly.
+
+```bash
+<%= render partial: "product", locals: { product: @product } %>
+```
+
+- can be written as:
+
+```bash
+<%= render "product", product: @product %>
+```
+
+- Even more concisely:
+
+```bash
+<%= render @product %>
+```
+
+- This looks for `_product.html.erb` in `app/views/products/`.
+
+- Passes a local variable product set to `@product`.
+
+## 4.6 as and object Options
+
+- By default, objects are assigned to a local variable matching the partial’s name.
+
+```bash
+<%= render @product %>
+```
+
+- Equivalent to:
+
+```bash
+<%= render partial: "product", locals: { product: @product } %>
+```
+
+### Using object Option
+
+- Assign a different instance variable to the local variable:
+
+```bash
+<%= render partial: "product", object: @item %>
+```
+
+- This assigns @item to product inside _product.html.erb.
+
+### Using as Option
+
+- Change the local variable name:
+
+```bash
+<%= render partial: "product", object: @item, as: "item" %>
+```
+
+- Equivalent to:
+
+```bash
+<%= render partial: "product", locals: { item: @item } %>
+```
+
+## 4.7 Rendering Collections
+
+### Iterating Over Collections
+
+- Instead of manually iterating over @products and rendering a partial:
+
+```bash
+<% @products.each do |product| %>
+  <%= render partial: "product", locals: { product: product } %>
+<% end %>
+```
+
+- Use a single-line shorthand:
+
+```bash
+<%= render partial: "product", collection: @products %>
+```
+
+- Each instance of the partial gets access to an individual member of the collection using a variable named after the partial (e.g., product for _product.html.erb).
+
+### Shorthand Syntax
+
+- Rails allows an even shorter syntax:
+
+```bash
+<%= render @products %>
+```
+
+- This assumes @products is a collection of Product instances and automatically determines the correct partial based on naming conventions.
+
+- Works with collections containing multiple model types; Rails selects the correct partial for each instance.
+
+## 4.8 Spacer Templates
+
+### Adding Spacers Between Items
+
+- You can render a separate spacer partial between elements using `:spacer_template`:
+
+```bash 
+<%= render partial: @products, spacer_template: "product_ruler" %>
+```
+
+- Rails will insert `_product_ruler.html.erb` between instances of `_product.html.erb`.
+
+## 4.9 Counter Variables
+
+### Accessing a Counter Variable
+
+- When rendering a collection, Rails provides an automatic counter variable in the format <partial_name>_counter.
+
+```bash
+<%= render partial: "product", collection: @products %>
+```
+
+- Inside _product.html.erb:
+
+```bash
+<%= product_counter %> # Outputs: 0 for the first product, 1 for the second, etc.
+```
+
+### Using a Custom Variable Name
+
+- If using the as: option, the counter variable changes accordingly.
+
+```bash
+<%= render partial: "product", collection: @products, as: :item %>
+```
+
+- Inside _product.html.erb:
+
+```bash
+<%= item_counter %> # Outputs: 0 for the first item, 1 for the second, etc.
+```
+
+
 
 

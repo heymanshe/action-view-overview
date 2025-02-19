@@ -1,0 +1,41 @@
+<%# <div class="product">
+  <h2><%= product.name - $<%= product.price %></h2>
+  <%# <p><%= product.description %></p>
+<%# </div>   %> 
+
+<%# tag.div id: dom_id(my_product) , class: "product" do >
+  <h2><%= my_product.name - $<%= my_product.price %></h2>
+  <%# <p><%= my_product.description %></p>
+
+ <%# <% if my_reviews.present? %>
+    <%# <% my_reviews.each do |review| %>
+      <%# <p><%= review.content %></p>
+    <%# <% end %>
+  <%# <% else %>
+    <%# <p>No reviews yet.</p>
+  <% end %>
+<%# <% end %> 
+
+<%# <p>Product Name: <%= product.name %></p>
+
+<%# <% if local_assigns[:product_reviews] %>
+  <%# <p>Reviews: <%= product_reviews.count %></p>
+  <%# <ul>
+    <% product_reviews.each do |review| %>
+      <%# <li><%= review.content %></li>
+    <%# <% end %>
+  <%# </ul>
+<% else %>
+  <%# <p>No reviews available.</p>
+<% end %>
+
+<%# <div>
+  <h3><%= product.name %></h3>
+  <%# <p>Price: $<%= product.price %></p>
+<%# </div> %> 
+
+<div class="product">
+  <p><strong>Product <%= product_counter + 1 %>:</strong> <%= product.name %></p>
+  <p><strong>Price:</strong> $<%= product.price %></p>
+</div>
+
