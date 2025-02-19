@@ -125,3 +125,34 @@ Hi, Mr. <% puts "Frodo" %>
 
 - `<%- -%>` can be used instead of `<% %>` to suppress leading and trailing whitespaces.
 
+## 3.2 Jbuilder 
+
+- Jbuilder is a gem maintained by the Rails team and included in the default Rails Gemfile. It is used to build JSON responses using templates.
+
+### Installation
+
+- If Jbuilder is not installed, add the following to your Gemfile:
+
+```bash
+gem "jbuilder"
+```
+
+### Usage
+
+- A Jbuilder object named json is automatically available in templates with a .jbuilder extension.
+
+```bash
+json.name "Alex"
+json.email "alex@example.com"
+```
+
+### Output
+
+```bash
+{
+  "name": "Alex",
+  "email": "alex@example.com"
+}
+```
+
+

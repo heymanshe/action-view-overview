@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :articles
 
+  resources :users, only: [ :show ]
 
   resources :welcome
   # root "welcome#index"
