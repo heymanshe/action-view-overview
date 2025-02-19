@@ -45,3 +45,8 @@
 <%= tag.div id: dom_id(product), **options do %>
   <h1><%= product.name %></h1>
 <% end %>
+
+<div class="product">
+  <p><strong>Product <%= product_counter + 1 %>:</strong> <%= product.name %></p>
+  <p><strong>Price:</strong> $<%= product.price %></p>
+</div>
