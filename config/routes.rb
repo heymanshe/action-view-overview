@@ -13,5 +13,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :articles
-  root "articles#index"
+
+  resources :users, only: [ :show ]
+
+  resources :people
+  resources :welcome
+  # root "welcome#index"
 end
