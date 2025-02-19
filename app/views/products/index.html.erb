@@ -4,7 +4,9 @@
 
 <p>Here are a few of our fine products:</p>
 <% @products.each do |product| %>
-  <%= render partial: "product", locals: { my_product: product, my_reviews: @reviews[product.id] || []  } %>
+  <%# <%= render partial: "product", locals: { my_product: product, my_reviews: @reviews[product.id] || []  } %>
+  <%= render partial: "product", locals: { product: product, product_reviews: @product_reviews[product.id] || []} %>
 <% end %>
 
 <%= render "layouts/footer" %>
+

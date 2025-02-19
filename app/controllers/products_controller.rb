@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
       @products = Product.all
       # @reviews = Review.where(product_id: @product.id)
-      @reviews = Review.all.group_by(&:product_id)
+      @product_reviews = Review.all.group_by(&:product_id)
     # end
   end
 

@@ -321,3 +321,36 @@ xml.div {
 - Use meaningful variable names to avoid confusion between instance variables and local variables in partials.
 
 - When passing multiple values, organize them properly for clarity.
+
+## 4.4 Using local_assigns in Rails Partials
+
+- Each partial in Rails has a method called local_assigns, which allows access to keys passed via the locals: option. If a key is not provided when rendering the partial, local_assigns[:some_key] will return nil.
+
+```bash
+<%# app/views/products/show.html.erb %>
+<%= render partial: "product", locals: { product: @product } %>
+
+<%# app/views/products/_product.html.erb %>
+<% local_assigns[:product]          # => "#<Product:0x0000000109ec5d10>" %>
+<% local_assigns[:product_reviews]  # => nil %>
+```
+
+### Use Cases
+
+- **Conditional Execution in Partials**
+
+  - Using local_assigns, we can check if a local variable is passed and conditionally perform an action:
+
+  - ```bash
+    <% if local_assigns[:redirect] %>
+      <%= form.hidden_field :redirect, value: true %>
+    <% end %>
+    ```
+
+- **Example from Active Storage**
+
+  - Setting image size dynamically based on whether in_gallery is set:
+
+  - ```bash
+    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [800, 600] : [1024, 768]) %>
+    ```
