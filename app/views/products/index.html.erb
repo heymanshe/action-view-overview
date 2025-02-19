@@ -1,8 +1,10 @@
-<h1>Product List</h1>
+<%= render "layouts/ad_banner" %>
 
-<% products = [ {name: "Laptop", price: "$1000"}, {name: "Phone", price: "$500"} ] %>
+<h1>Products</h1>
 
-<% products.each do |product| %>
-  <%= render "product", product: product %>
+<p>Here are a few of our fine products:</p>
+<% @products.each do |product| %>
+  <%= render partial: "product", locals: { product: product } %>
 <% end %>
 
+<%= render "layouts/footer" %>

@@ -227,3 +227,48 @@ xml.div {
 ```
 
 - This looks for `_product.html.erb` inside `app/views/application/`.
+
+
+## 4.2 Using Partials to Simplify Views
+
+- Partials help simplify views by extracting repeated sections into separate files.
+
+- They work like methods in programming—keeping views clean and easier to understand.
+
+```ruby
+<%= render "application/ad_banner" %>
+
+<h1>Products</h1>
+
+<p>Here are a few of our fine products:</p>
+<% @products.each do |product| %>
+  <%= render partial: "product", locals: { product: product } %>
+<% end %>
+
+<%= render "application/footer" %>
+```
+
+### Breakdown
+
+- **Shared Partials**:
+
+  - `_ad_banner.html.erb` and `_footer.html.erb` contain content used across multiple pages.
+
+  - Keeps layout DRY (Don't Repeat Yourself).
+
+- **Rendering Collections**:
+
+  - `_product.html.erb` is used to render individual products.
+
+  - `<%= render partial: "product", locals: { product: product } %>` passes a product to the partial.
+
+  - Helps keep the main view focused on structure rather than details.
+
+### Benefits of Using Partials
+
+- Enhances code reusability.
+
+- Improves readability and maintainability.
+
+= Helps organize views logically and efficiently.
+
