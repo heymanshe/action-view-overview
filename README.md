@@ -155,4 +155,54 @@ json.email "alex@example.com"
 }
 ```
 
+## 3.3 Builder
+
+- Builder templates generate `XML` and are an alternative to `ERB`.
+
+- Similar to JBuilder but used for XML output.
+
+- An XmlMarkup object (xml) is available in .builder templates.
+
+```bash
+xml.em("emphasized")
+xml.em { xml.b("emph & bold") }
+xml.a("A Link", "href" => "https://rubyonrails.org")
+xml.target("name" => "compile", "option" => "fast")
+```
+
+```bash
+<em>emphasized</em>
+<em><b>emph &amp; bold</b></em>
+<a href="https://rubyonrails.org">A link</a>
+<target option="fast" name="compile" />
+```
+
+- Methods with blocks are treated as XML tags with nested elements.
+
+```bash
+xml.div {
+  xml.h1(@person.name)
+  xml.p(@person.bio)
+}
+```
+
+```bash
+<div>
+  <h1>David Heinemeier Hansson</h1>
+  <p>A product of Danish Design during the Winter of '79...</p>
+</div>
+```
+
+- More examples are available in the Builder documentation.
+
+## 3.4 Template Compilation
+
+- Rails compiles each template into a method for rendering.
+
+- In development, Rails checks for file modifications and recompiles as needed.
+
+- Fragment Caching allows parts of a page to be cached and expired separately.
+
+
+
 
