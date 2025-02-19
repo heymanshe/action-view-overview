@@ -449,5 +449,16 @@ xml.div {
 
 - Works with collections containing multiple model types; Rails selects the correct partial for each instance.
 
+## 4.8 Spacer Templates
+
+### Adding Spacers Between Items
+
+- You can render a separate spacer partial between elements using `:spacer_template`:
+
+```bash 
+<%= render partial: @products, spacer_template: "product_ruler" %>
+```
+
+- Rails will insert `_product_ruler.html.erb` between instances of `_product.html.erb`.
 
 

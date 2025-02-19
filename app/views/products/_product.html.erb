@@ -29,7 +29,12 @@
   <%# <p>No reviews available.</p>
 <% end %>
 
-<div>
+<%# <div>
   <h3><%= product.name %></h3>
-  <p>Price: $<%= product.price %></p>
+  <%# <p>Price: $<%= product.price %></p>
+<%# </div> %> 
+
+<div class="product">
+  <p><strong>Name:</strong> <%= product.name %></p>
+  <p><strong>Price:</strong> $<%= product.price %></p>
 </div>
