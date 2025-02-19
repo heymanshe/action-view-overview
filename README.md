@@ -354,3 +354,28 @@ xml.div {
   - ```bash
     <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [800, 600] : [1024, 768]) %>
     ```
+
+## 4.5 Render Without partial and locals Options
+
+- If partial and locals are the only options, you can omit their keys and provide values directly.
+
+```bash
+<%= render partial: "product", locals: { product: @product } %>
+```
+
+- can be written as:
+
+```bash
+<%= render "product", product: @product %>
+```
+
+- Even more concisely:
+
+```bash
+<%= render @product %>
+```
+
+- This looks for `_product.html.erb` in `app/views/products/`.
+
+- Passes a local variable product set to `@product`.
+
