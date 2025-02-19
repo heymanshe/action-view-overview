@@ -461,4 +461,36 @@ xml.div {
 
 - Rails will insert `_product_ruler.html.erb` between instances of `_product.html.erb`.
 
+## 4.9 Counter Variables
+
+### Accessing a Counter Variable
+
+- When rendering a collection, Rails provides an automatic counter variable in the format <partial_name>_counter.
+
+```bash
+<%= render partial: "product", collection: @products %>
+```
+
+- Inside _product.html.erb:
+
+```bash
+<%= product_counter %> # Outputs: 0 for the first product, 1 for the second, etc.
+```
+
+### Using a Custom Variable Name
+
+- If using the as: option, the counter variable changes accordingly.
+
+```bash
+<%= render partial: "product", collection: @products, as: :item %>
+```
+
+- Inside _product.html.erb:
+
+```bash
+<%= item_counter %> # Outputs: 0 for the first item, 1 for the second, etc.
+```
+
+
+
 
