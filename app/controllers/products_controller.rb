@@ -27,6 +27,9 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     respond_to do |format|
+      if params[:redirect]
+        puts "Redirect flag is set!"
+      end
       if @product.save
         format.html { redirect_to @product, notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
