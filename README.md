@@ -379,3 +379,42 @@ xml.div {
 
 - Passes a local variable product set to `@product`.
 
+## 4.6 as and object Options
+
+- By default, objects are assigned to a local variable matching the partial’s name.
+
+```bash
+<%= render @product %>
+```
+
+- Equivalent to:
+
+```bash
+<%= render partial: "product", locals: { product: @product } %>
+```
+
+### Using object Option
+
+- Assign a different instance variable to the local variable:
+
+```bash
+<%= render partial: "product", object: @item %>
+```
+
+- This assigns @item to product inside _product.html.erb.
+
+### Using as Option
+
+- Change the local variable name:
+
+```bash
+<%= render partial: "product", object: @item, as: "item" %>
+```
+
+- Equivalent to:
+
+```bash
+<%= render partial: "product", locals: { item: @item } %>
+```
+
+
