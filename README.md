@@ -270,5 +270,54 @@ xml.div {
 
 - Improves readability and maintainability.
 
-= Helps organize views logically and efficiently.
+- Helps organize views logically and efficiently.
 
+## 4.3 Passing Data to Partials with locals Option
+
+- When rendering a partial in Rails, you can pass data to it using the locals option. Each key in the locals hash is available as a local variable within the partial.
+
+### Syntax
+
+**Rendering a Partial with locals**
+
+```bash
+<%= render partial: "product", locals: { my_product: @product } %>
+```
+
+**Using the Passed Local Variable in the Partial**
+
+```bash
+<%= tag.div id: dom_id(my_product) do %>
+  <h1><%= my_product.name %></h1>
+<% end %>
+```
+
+### Key Points
+
+- **Partial-local variables**: Variables passed via locals are only available inside the partial.
+
+- **Naming convention**: Typically, you would name the local variable the same as the object being passed (e.g., product instead of my_product).
+
+- **Passing multiple variables**: You can pass multiple variables like this:
+
+```bash
+<%= render partial: "product", locals: { my_product: @product, my_reviews: @reviews } %>
+```
+
+- **Error handling**: If a variable is referenced in the partial but not passed through locals, an `ActionView::Template::Error` will be raised.
+
+```bash
+<% product_reviews.each do |review| %>
+  <%# ... %>
+<% end %>
+```
+
+- This will raise an error if `product_reviews` is not included in `locals`.
+
+### Best Practices
+
+- Always ensure that variables used in partials are passed explicitly through `locals`.
+
+- Use meaningful variable names to avoid confusion between instance variables and local variables in partials.
+
+- When passing multiple values, organize them properly for clarity.

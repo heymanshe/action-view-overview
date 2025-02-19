@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @product %>
+<%# <%= render @product %> 
+
+<%= render partial: "product", locals: { my_product: @product, my_reviews: @reviews } %>
+
 
 <div>
   <%= link_to "Edit this product", edit_product_path(@product) %> |
@@ -8,3 +11,4 @@
 
   <%= button_to "Destroy this product", @product, method: :delete %>
 </div>
+

@@ -3,7 +3,10 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+      @products = Product.all
+      # @reviews = Review.where(product_id: @product.id)
+      @reviews = Review.all.group_by(&:product_id)
+    # end
   end
 
   # GET /products/1 or /products/1.json
