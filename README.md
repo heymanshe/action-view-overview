@@ -565,6 +565,92 @@ product == record   # => true
 <% end %>
 ```
 
+# 5. Layout
 
+- Layouts in Rails allow rendering a common view template around the results of controller actions. A Rails application can have multiple layouts to suit different sections of the site, such as:
 
+- **User Layout**: For logged-in users with navigation elements.
 
+- **Marketing Layout**: For pages like pricing and contact.
+
+### How Rails Determines the Layout
+
+- Rails looks for a layout file in `app/views/layouts` with the same name as the controller. 
+
+  - `ProductsController` → `app/views/layouts/products.html.erb`
+
+- If a specific controller layout does not exist, Rails defaults to `app/views/layouts/application.html.erb`.
+
+### Layout (application.html.erb)
+
+```bash
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= "Your Rails App" %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Products", products_path %></li>
+  </ul>
+</nav>
+
+<%= yield %>
+
+<footer>
+  <p>&copy; <%= Date.current.year %> Your Company</p>
+</footer>
+</body>
+</html>
+```
+
+- The `<%= yield %>` placeholder is where individual view content is inserted.
+
+## 5.1 Partial Layouts
+
+- Partials can have their own layouts, separate from controller-based layouts.
+
+Useful for wrapping smaller content blocks with styling elements.
+
+### Creating an Article
+
+```bash
+Article.create(body: "Partial Layouts are cool!")
+```
+
+### Rendering a Partial with a Layout
+
+```bash
+<%= render partial: 'article', layout: 'box', locals: { article: @article } %>
+```
+
+- Here, the `_article` partial is wrapped inside the `box` layout.
+
+### Box Layout (_box.html.erb)
+
+```bash
+<div class="box">
+  <%= yield %>
+</div>
+```
+
+### Rendering a Block within a Layout
+
+- If there is no `_article` partial, a block can be rendered directly:
+
+```bash
+<%= render(layout: 'box', locals: { article: @article }) do %>
+  <div>
+    <p><%= article.body %></p>
+  </div>
+<% end %>
+```
+
+- The block is inserted into the layout instead of using yield from a partial.

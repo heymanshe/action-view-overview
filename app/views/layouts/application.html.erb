@@ -22,8 +22,25 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  
   <body>
-    <h1>Welcome to My Rails App</h1>
+
+    <header>
+      <h1>Welcome to My Rails App</h1>
+    </header>
+    
+    <nav>
+      <%= link_to "Home", root_path %> |
+      <%= link_to "Articles", articles_path %>
+    </nav>
     <%= yield %>
+
+    <footer>
+      <p>&copy; <%= Date.current.year %> My Rails App</p>
+    </footer>
+
   </body>
 </html>
+
+
+
