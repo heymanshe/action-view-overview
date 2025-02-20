@@ -675,3 +675,17 @@ Article.create(body: "Partial Layouts are cool!")
 
 - Helps in maintaining DRY (Don't Repeat Yourself) principles by reducing redundant layout structures.
 
+# 6. Helpers in Rails
+
+- Rails provides various helper methods to simplify working with Action View. These include:
+
+  - **Formatting**: Dates, strings, and numbers.
+
+  - **Asset Links**: Creating HTML links for images, videos, stylesheets, etc.
+
+  - **Content Sanitization**: Ensuring safe output of user-generated content.
+
+  - **Forms**: Assisting in form creation.
+
+  - **Localization**: Supporting content translation and formatting.
+
