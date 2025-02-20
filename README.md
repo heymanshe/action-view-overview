@@ -654,3 +654,24 @@ Article.create(body: "Partial Layouts are cool!")
 ```
 
 - The block is inserted into the layout instead of using yield from a partial.
+
+## 5.2 Collection with Partial Layouts in Rails
+
+- When rendering collections in Rails, you can use the :layout option with render.
+
+```bash
+<%= render partial: "article", collection: @articles, layout: "special_layout" %>
+```
+
+### Key Points
+
+- The specified layout will be wrapped around each partial in the collection.
+
+- Variables `article` (current object) and `article_counter` (index) will be available in both the partial and the layout.
+
+### Use Case
+
+- Useful when you need a consistent wrapper around each rendered partial.
+
+- Helps in maintaining DRY (Don't Repeat Yourself) principles by reducing redundant layout structures.
+
